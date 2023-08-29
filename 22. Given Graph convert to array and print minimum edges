@@ -1,0 +1,97 @@
+// C# program to find minimum edge
+// between given two vertex of Graph
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+class GFG{
+	
+// Method for finding minimum no. of edge
+// using BFS
+static int minEdgeBFS(ArrayList []edges, int u,
+								int v, int n)
+{
+	
+	// visited[n] for keeping track of visited
+	// node in BFS
+	ArrayList visited = new ArrayList();
+	for(int i = 0; i < n; i++)
+	{
+		visited.Add(false);
+	}
+
+	// Initialize distances as 0
+	ArrayList distance = new ArrayList();
+	for(int i = 0; i < n; i++)
+	{
+		distance.Add(0);
+	}
+
+	// queue to do BFS.
+	Queue Q = new Queue();
+	
+	distance[u] = 0;
+
+	Q.Enqueue(u);
+	
+	visited[u] = true;
+	
+	while (Q.Count != 0)
+	{
+		int x = (int)Q.Dequeue();
+
+		for(int i = 0; i < edges[x].Count; i++)
+		{
+			if ((bool)visited[(int)edges[x][i]])
+				continue;
+				
+			// Update distance for i
+			distance[(int)edges[x][i]] = (int)distance[x] + 1;
+			Q.Enqueue((int)edges[x][i]);
+			visited[(int)edges[x][i]] = true;
+		}
+	}
+	return (int)distance[v];
+}
+
+// Method for addition of edge
+static void addEdge(ArrayList []edges,
+					int u, int v)
+{
+	edges[u].Add(v);
+	edges[v].Add(u);
+}
+
+// Driver code
+public static void Main(string []args)
+{
+	
+	// To store adjacency list of graph
+	int n = 9;
+	ArrayList []edges = new ArrayList[9];
+	
+	for(int i = 0; i < 9; i++)
+	{
+		edges[i] = new ArrayList();
+	}
+	
+	addEdge(edges, 0, 1);
+	addEdge(edges, 0, 7);
+	addEdge(edges, 1, 7);
+	addEdge(edges, 1, 2);
+	addEdge(edges, 2, 3);
+	addEdge(edges, 2, 5);
+	addEdge(edges, 2, 8);
+	addEdge(edges, 3, 4);
+	addEdge(edges, 3, 5);
+	addEdge(edges, 4, 5);
+	addEdge(edges, 5, 6);
+	addEdge(edges, 6, 7);
+	addEdge(edges, 7, 8);
+	
+	int u = 0;
+	int v = 5;
+	
+	Console.Write(minEdgeBFS(edges, u, v, n));
+}
+}
