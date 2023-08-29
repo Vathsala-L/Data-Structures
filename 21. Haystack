@@ -1,0 +1,29 @@
+char *my_strstr(char *haystack, char *needle)
+{
+   int i;
+
+   if (!needle || !*needle)
+       return (haystack); // if s2 is empty
+   while (*haystack != '\0')
+   {
+    i = 0;
+    while (*haystack != *needle && *haystack != '\0')
+        haystack++;
+    while (haystack[i] == needle[i] && haystack[i] != '\0')
+        i++;
+    if (needle[i] == '\0')
+        return (haystack);
+    haystack++;
+   }
+    return  (0);
+}
+int     main(void)
+{
+    char *haystack = "Stacy Lives Next Door Fool";
+    char *needle = "Stb";
+    char *ptr;
+
+    ptr = my_strstr(haystack, needle);
+    printf("%s\n", ptr);
+    return (0); 
+ }
