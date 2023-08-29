@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <string.h>
+char ch[50];
+void ascendingOrder() {
+ 	int i, j;
+ 	char temp;
+ 	int SLength = strlen(ch);
+ 	for (i = 0; i < SLength - 1; i++) {
+   		for (j = i + 1; j < SLength; j++) {
+     		if (ch[i] > ch[j]) {
+       			temp = ch[i];
+       			ch[i] = ch[j];
+       			ch[j] = temp;
+     		}
+   		}
+ 	}
+}
+int main() {
+ 	printf("\n Enter a string:\n ");
+ 	fgets(ch, 50, stdin);
+ 	ascendingOrder();
+ 	puts(ch);
+ 	return 0;
+}
